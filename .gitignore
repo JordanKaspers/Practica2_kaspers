@@ -75,3 +75,8 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Practica2_kaspers/Binaries/Win64/Practica2_kaspersEditor.target
+Practica2_kaspers/Intermediate/CachedAssetRegistry.bin
+Practica2_kaspers/Saved/
+Practica2_kaspers/Intermediate/
+Practica2_kaspers/Binaries/
