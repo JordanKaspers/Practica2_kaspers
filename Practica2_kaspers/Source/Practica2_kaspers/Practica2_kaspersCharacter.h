@@ -18,7 +18,9 @@ class APractica2_kaspersCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
 public:
+
 	APractica2_kaspersCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
@@ -28,17 +30,74 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+  /*
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  bool Running = false;
 
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  bool Throwing = false;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  bool Sneaking = false;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  bool Crouching = false;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float Speed = 0;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float MaxWalkSpeed = 200;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float SneakSpeed = 25;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float CrouchSpeed = 150;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float RunSpeed = 400;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float CrouchVolume = 0.25f;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float RunVolume = 1;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Set up")
+  float SoundRadius = 100;
+  */
 protected:
-
-	/** Resets HMD orientation in VR. */
-	void OnResetVR();
 
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
 
 	/** Called for side to side input */
 	void MoveRight(float Value);
+
+  /** Called for crouch input */
+  void Crouch();
+
+  /** Called when crouch input stops */
+  void StopCrouch();
+
+  /** Called for sneak input */
+  void Sneak();
+
+  /** Called when sneak input stops */
+  void StopSneak();
+
+  /** Called for run input */
+  void Run();
+
+  /** Called when run input stops */
+  void StopRun();
+
+  /** Called for throw input */
+  void Throw();
+
+  /** Called when throw input stops */
+  void StopThrow();
 
 	/** 
 	 * Called via input to turn at a given rate. 
@@ -52,18 +111,14 @@ protected:
 	 */
 	void LookUpAtRate(float Rate);
 
-	/** Handler for when a touch input begins. */
-	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
-
-	/** Handler for when a touch input stops. */
-	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
-
 protected:
+
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
 public:
+
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
