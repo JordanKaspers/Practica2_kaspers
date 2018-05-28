@@ -42,3 +42,9 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
     Destroy();
   }
 }
+
+void AProjectile::LaunchProjectile(float Speed)
+{
+  ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
+  ProjectileMovement->Activate();
+}

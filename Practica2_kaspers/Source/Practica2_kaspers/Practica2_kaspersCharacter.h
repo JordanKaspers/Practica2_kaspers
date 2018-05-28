@@ -75,30 +75,6 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
-  /** Called for crouch input */
-  void Crouch();
-
-  /** Called when crouch input stops */
-  void StopCrouch();
-
-  /** Called for sneak input */
-  void Sneak();
-
-  /** Called when sneak input stops */
-  void StopSneak();
-
-  /** Called for run input */
-  void Run();
-
-  /** Called when run input stops */
-  void StopRun();
-
-  /** Called for throw input */
-  void Throw();
-
-  /** Called when throw input stops */
-  void StopThrow();
-
 	/** 
 	 * Called via input to turn at a given rate. 
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate

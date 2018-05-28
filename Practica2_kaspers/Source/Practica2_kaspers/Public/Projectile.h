@@ -18,8 +18,9 @@ class PRACTICA2_KASPERS_API AProjectile : public AActor
   /** Projectile movement component */
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
   class UProjectileMovementComponent* ProjectileMovement;
-	
+
 public:	
+	
 	// Sets default values for this actor's properties
 	AProjectile();
 
@@ -31,5 +32,7 @@ public:
   FORCEINLINE class USphereComponent* GetCollisionComp() const { return CollisionComp; }
   /** Returns ProjectileMovement subobject **/
   FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
+  
+  void LaunchProjectile(float Speed);
 
 };

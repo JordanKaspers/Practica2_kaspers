@@ -54,18 +54,6 @@ void APractica2_kaspersCharacter::SetupPlayerInputComponent(class UInputComponen
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-  /*
-  PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &APractica2_kaspersCharacter::Crouch);
-  PlayerInputComponent->BindAction("Crouch", IE_Released, this, &APractica2_kaspersCharacter::StopCrouch);
-  PlayerInputComponent->BindAction("Sneak", IE_Pressed, this, &APractica2_kaspersCharacter::Sneak);
-  PlayerInputComponent->BindAction("Sneak", IE_Released, this, &APractica2_kaspersCharacter::StopSneak);
-  PlayerInputComponent->BindAction("Run", IE_Pressed, this, &APractica2_kaspersCharacter::Run);
-  PlayerInputComponent->BindAction("Run", IE_Released, this, &APractica2_kaspersCharacter::StopRun);
-  PlayerInputComponent->BindAction("Throw", IE_Pressed, this, &APractica2_kaspersCharacter::Throw);
-  PlayerInputComponent->BindAction("Throw", IE_Released, this, &APractica2_kaspersCharacter::StopThrow);
-  */
 	PlayerInputComponent->BindAxis("MoveForward", this, &APractica2_kaspersCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &APractica2_kaspersCharacter::MoveRight);
 
@@ -120,47 +108,3 @@ void APractica2_kaspersCharacter::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
-/*
-void APractica2_kaspersCharacter::Crouch()
-{
-  ACharacter::Crouch();
-  //ACharacter::Movement()->SetMaxWalkSpeed(CrouchSpeed);
-  ACharacter::GetMovementComponent()->SetMaxWalkSpeed
-}
-
-void APractica2_kaspersCharacter::StopCrouch()
-{
-
-}
-
-void APractica2_kaspersCharacter::Sneak()
-{
-
-}
-
-void APractica2_kaspersCharacter::StopSneak()
-{
-
-}
-
-void APractica2_kaspersCharacter::Run()
-{
-
-}
-
-void APractica2_kaspersCharacter::StopRun()
-{
-
-}
-
-void APractica2_kaspersCharacter::Throw()
-{
-
-}
-
-void APractica2_kaspersCharacter::StopThrow()
-{
-
-}
-
-*/
