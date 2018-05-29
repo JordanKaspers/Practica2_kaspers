@@ -24,6 +24,8 @@ public:
 	// Sets default values for this actor's properties
 	AProjectile();
 
+  virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
   /** called when projectile hits something */
   UFUNCTION()
   void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
@@ -35,4 +37,5 @@ public:
   
   void LaunchProjectile(float Speed);
 
+  bool bEndPlay = false;
 };

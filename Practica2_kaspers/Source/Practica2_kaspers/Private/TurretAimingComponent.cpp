@@ -3,9 +3,11 @@
 #include "TurretAimingComponent.h"
 #include "Components/SceneComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Turret.h"
 #include "TurretBarrel.h"
 #include "TurretDome.h"
 #include "Projectile.h"
+#include "ProjectilePool.h"
 
 
 // Sets default values for this component's properties
@@ -23,10 +25,11 @@ void UTurretAimingComponent::BeginPlay()
   LastFireTime = FPlatformTime::Seconds();
 }
 
-void UTurretAimingComponent::Initialise(UTurretBarrel* BarrelToSet, UTurretDome* DomeToSet)
+void UTurretAimingComponent::Initialise(ATurret* TurretToSet, UTurretBarrel* BarrelToSet, UTurretDome* DomeToSet)
 {
+  Turret = TurretToSet;
   Barrel = BarrelToSet;
-  Turret = DomeToSet;
+  Dome = DomeToSet;
 }
 
 void UTurretAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
@@ -84,7 +87,7 @@ void UTurretAimingComponent::AimAt(FVector HitLocation)
 
 void UTurretAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-  if (!ensure(Barrel) || !ensure(Turret)) { return; }
+  if (!ensure(Barrel) || !ensure(Dome)) { return; }
   // Difference between current barrel rotation, and AimDirection
   FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
   FRotator AimAsRotator = AimDirection.Rotation();
@@ -93,11 +96,11 @@ void UTurretAimingComponent::MoveBarrelTowards(FVector AimDirection)
   Barrel->Elevate(DeltaRotator.Pitch);
   if (FMath::Abs(DeltaRotator.Yaw) < 180)
   {
-    Turret->Rotate(DeltaRotator.Yaw);
+    Dome->Rotate(DeltaRotator.Yaw);
   }
   else  // ensuring rotating the fast way around
   {
-    Turret->Rotate(-DeltaRotator.Yaw);
+    Dome->Rotate(-DeltaRotator.Yaw);
   }
 }
 
@@ -108,12 +111,21 @@ void UTurretAimingComponent::Fire()
     // Spawn a bullet at the socket location of the barrel
     if (!ensure(Barrel)) { return; }
     if (!ensure(ProjectileBlueprint)) { return; }
+
+    //auto Projectile = Turret->GetPool()->Checkout();
+    //Projectile->SetActorLocation(Barrel->GetSocketLocation(FName("Bullet")));
+
+    
     auto Projectile = GetWorld()->SpawnActor<AProjectile>(
       ProjectileBlueprint,
       Barrel->GetSocketLocation(FName("Bullet")),
       Barrel->GetSocketRotation(FName("Bullet"))
       );
-    Projectile->LaunchProjectile(LaunchSpeed);
+    
+
+
+
+    //Projectile->LaunchProjectile(LaunchSpeed);
     LastFireTime = FPlatformTime::Seconds();
   }
 }

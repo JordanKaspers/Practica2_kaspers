@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "Turret.generated.h"
 
+class UProjectilePool;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTTurretDelegate);
 
 UCLASS()
@@ -30,6 +32,16 @@ public:
 	// Called to bind functionality to input
 	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+  UFUNCTION(BlueprintCallable, Category = "Pool")
+  UProjectilePool* GetPool();
+
+  UFUNCTION(BlueprintCallable, Category = "Pool")
+  void SetPool(UProjectilePool* Pool);
+
+private:
+
+  UProjectilePool* Pool;
+
+  void PositionProjectile();
 	
 };

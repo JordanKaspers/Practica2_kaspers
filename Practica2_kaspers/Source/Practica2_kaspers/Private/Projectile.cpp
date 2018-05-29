@@ -30,7 +30,13 @@ AProjectile::AProjectile()
   ProjectileMovement->bShouldBounce = true;
 
   // Die after 3 seconds by default
-  InitialLifeSpan = 3.0f;
+  InitialLifeSpan = 10.0f;
+}
+
+void AProjectile::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+  UE_LOG(LogTemp, Warning, TEXT(" %s EndPlay "), *GetName())
+  bEndPlay = true;
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -39,7 +45,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
   if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
   {
     OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-    Destroy();
+    //Destroy();
   }
 }
 
@@ -47,4 +53,6 @@ void AProjectile::LaunchProjectile(float Speed)
 {
   ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
   ProjectileMovement->Activate();
+  
+  
 }

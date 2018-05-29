@@ -17,7 +17,8 @@ void ATurretAIController::SetPawn(APawn* InPawn)
   if (InPawn)
   {
     ATurret* PossessedTurret = Cast<ATurret>(InPawn);
-    if (!ensure(PossessedTurret)) { return; }
+    //if (!ensure(PossessedTurret)) { return; }
+    if (!PossessedTurret) { return; }
 
     // Subscribe method to the turret's death event
     PossessedTurret->OnDeath.AddUniqueDynamic(this, &ATurretAIController::OnPossessedTurretDeath);
@@ -39,7 +40,7 @@ void ATurretAIController::Tick(float DeltaTime)
 
   if (!ensure(Player && ControlledTurret)) { return; }
   // Move towards the player
-  //MoveToActor(PlayerTank, AcceptanceRadius);   
+  //MoveToActor(Player, AcceptanceRadius);   
 
   // Aim towards the player
   UTurretAimingComponent* AimingComponent = ControlledTurret->FindComponentByClass<UTurretAimingComponent>();

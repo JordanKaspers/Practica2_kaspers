@@ -12,8 +12,9 @@ class APractica2_kaspersGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	APractica2_kaspersGameMode();
-};
 
+	APractica2_kaspersGameMode();
+
+};
 
 

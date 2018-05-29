@@ -16,6 +16,7 @@ enum class EFiringState : uint8
 };
 
 // Forward Declarations
+class ATurret;
 class UTurretBarrel;
 class UTurretDome;
 class AProjectile;
@@ -28,7 +29,7 @@ class PRACTICA2_KASPERS_API UTurretAimingComponent : public UActorComponent
 public:	
 
   UFUNCTION(BlueprintCallable, Category = "Setup")
-  void Initialise(UTurretBarrel* BarrelToSet, UTurretDome* DomeToSet);
+  void Initialise(ATurret* TurretToSet, UTurretBarrel* BarrelToSet, UTurretDome* DomeToSet);
 
   void AimAt(FVector HitLocation);
 
@@ -59,13 +60,14 @@ private:
 
   bool IsBarrelMoving();
 
+  ATurret* Turret = nullptr;
   UTurretBarrel* Barrel = nullptr;
-  UTurretDome* Turret = nullptr;
+  UTurretDome* Dome = nullptr;
 
   UPROPERTY(EditDefaultsOnly, Category = "Setup")
   TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
 
-  UPROPERTY(EditDefaultsOnly, CAtegory = "Firing")
+  UPROPERTY(EditDefaultsOnly, Category = "Firing")
   float LaunchSpeed = 4000.0f;
 
   UPROPERTY(EditDefaultsOnly, Category = "Firing")
