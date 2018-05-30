@@ -27,9 +27,12 @@ public:
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pool")
   class UProjectilePool* ProjectilePool;
 
+  UPROPERTY(EditDefaultsOnly, Category = "Pool")
+  FVector InactiveProjectileStorage;
+
 private:
 
   void AddToPool(class AProjectile *ProjectileToAdd);
 	
-	
+  class AProjectile* Projectile;
 };

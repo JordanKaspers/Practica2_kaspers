@@ -53,8 +53,9 @@ void ATurret::PositionProjectile()
   AProjectile* Projectile = Pool->Checkout();
   if (Projectile == nullptr)
   {
-    UE_LOG(LogTemp, Error, TEXT("Not enough projectiles in pool!"));
+    //UE_LOG(LogTemp, Error, TEXT(" %s Not enough projectiles in pool!"), *GetName());
     return;
   }
+  //UE_LOG(LogTemp, Error, TEXT(" %s Checked out %s "), *GetName(), *Projectile->GetName());
   Projectile->SetActorLocation(GetActorLocation());
 }

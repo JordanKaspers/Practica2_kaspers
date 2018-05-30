@@ -21,5 +21,9 @@ public:
   void Return(class AProjectile* ProjectileToReturn);
 
   void Add(class AProjectile* ProjectileToAdd);
+
+private:
+
+  TArray<class AProjectile*> Pool;
 	
 };

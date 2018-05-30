@@ -12,7 +12,7 @@ class PRACTICA2_KASPERS_API AProjectile : public AActor
 	GENERATED_BODY()
 
   /** Sphere collision component */
-  UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+  UPROPERTY(VisibleDefaultsOnly, Category = "Projectile")
   class USphereComponent* CollisionComp;
 
   /** Projectile movement component */
@@ -35,7 +35,10 @@ public:
   /** Returns ProjectileMovement subobject **/
   FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
   
+  UFUNCTION(BlueprintCallable, Category = "Projectile")
   void LaunchProjectile(float Speed);
 
   bool bEndPlay = false;
+
+  class AMyPractica2_kaspersGameMode* MyGameMode;
 };

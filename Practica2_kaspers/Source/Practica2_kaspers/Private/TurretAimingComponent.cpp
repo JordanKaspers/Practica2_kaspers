@@ -3,11 +3,12 @@
 #include "TurretAimingComponent.h"
 #include "Components/SceneComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "Turret.h"
 #include "TurretBarrel.h"
 #include "TurretDome.h"
 #include "Projectile.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "ProjectilePool.h"
+#include "MyPractica2_kaspersGameMode.h"
 
 
 // Sets default values for this component's properties
@@ -17,17 +18,20 @@ UTurretAimingComponent::UTurretAimingComponent()
   // off to improve performance if you don't need them.
   PrimaryComponentTick.bCanEverTick = true;
 
+  if (GetWorld()) {
+    MyGameMode = (AMyPractica2_kaspersGameMode*)GetWorld()->GetAuthGameMode();
+  }
 }
 
 void UTurretAimingComponent::BeginPlay()
 {
   // So that first fire is after initial reload
   LastFireTime = FPlatformTime::Seconds();
+  
 }
 
-void UTurretAimingComponent::Initialise(ATurret* TurretToSet, UTurretBarrel* BarrelToSet, UTurretDome* DomeToSet)
+void UTurretAimingComponent::Initialise(UTurretBarrel* BarrelToSet, UTurretDome* DomeToSet)
 {
-  Turret = TurretToSet;
   Barrel = BarrelToSet;
   Dome = DomeToSet;
 }
@@ -114,7 +118,9 @@ void UTurretAimingComponent::Fire()
 
     //auto Projectile = Turret->GetPool()->Checkout();
     //Projectile->SetActorLocation(Barrel->GetSocketLocation(FName("Bullet")));
-
+    /*AProjectile* Projectile = MyGameMode->GetPool()->Checkout();
+    Projectile->SetActorLocation(Barrel->GetSocketLocation(FName("Bullet")));
+    Projectile->GetProjectileMovement()->Activate();*/
     
     auto Projectile = GetWorld()->SpawnActor<AProjectile>(
       ProjectileBlueprint,
@@ -122,10 +128,7 @@ void UTurretAimingComponent::Fire()
       Barrel->GetSocketRotation(FName("Bullet"))
       );
     
-
-
-
-    //Projectile->LaunchProjectile(LaunchSpeed);
+    Projectile->LaunchProjectile(LaunchSpeed);
     LastFireTime = FPlatformTime::Seconds();
   }
 }

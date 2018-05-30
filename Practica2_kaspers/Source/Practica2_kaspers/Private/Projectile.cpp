@@ -3,6 +3,8 @@
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "MyPractica2_kaspersGameMode.h"
+#include "ProjectilePool.h"
 
 
 // Sets default values
@@ -26,22 +28,33 @@ AProjectile::AProjectile()
   ProjectileMovement->UpdatedComponent = CollisionComp;
   ProjectileMovement->InitialSpeed = 4000.f;
   ProjectileMovement->MaxSpeed = 4000;
-  ProjectileMovement->bRotationFollowsVelocity = false;
+  ProjectileMovement->bRotationFollowsVelocity = true;
   ProjectileMovement->bShouldBounce = true;
+  //ProjectileMovement->Deactivate();
+  //ProjectileMovement->Activate();
 
   // Die after 3 seconds by default
-  InitialLifeSpan = 10.0f;
+  InitialLifeSpan = 3.0f;
+
+  if (GetWorld()) {
+    MyGameMode = (AMyPractica2_kaspersGameMode*)GetWorld()->GetAuthGameMode();
+  }
 }
 
 void AProjectile::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-  UE_LOG(LogTemp, Warning, TEXT(" %s EndPlay "), *GetName())
+  //UE_LOG(LogTemp, Warning, TEXT(" %s EndPlay "), *GetName())
   bEndPlay = true;
+  //ProjectileMovement->Deactivate();
+  if (MyGameMode != nullptr)
+  {
+    MyGameMode->GetPool()->Return(this);
+  }
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-  // Only add impulse and destroy projectile if we hit a physics
+  // Only add impulse if we hit a physics
   if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
   {
     OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
@@ -53,6 +66,5 @@ void AProjectile::LaunchProjectile(float Speed)
 {
   ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
   ProjectileMovement->Activate();
-  
   
 }
