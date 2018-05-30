@@ -37,7 +37,7 @@ void UProjectilePool::Add(AProjectile* ProjectileToAdd)
     //UE_LOG(LogTemp, Warning, TEXT(" %s added NULLPTR"), *GetName());
     return;
   }
-  Pool.Push(ProjectileToAdd);
+  //Pool.Push(ProjectileToAdd);
   //UE_LOG(LogTemp, Warning, TEXT(" %s added: %s "), *GetName(), *ProjectileToAdd->GetName());
 }
 
