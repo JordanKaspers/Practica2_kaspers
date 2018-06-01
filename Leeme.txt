@@ -1,0 +1,75 @@
+
+Nombre del alumno	: 	Jordan Kaspers
+Version de UE4		:	4.16
+
+
+
+--- Apartados Cumplidos ---
+
+
+- TAREA 1: Implementación de prototipo de juego con AI con UE4
+
+- Un personaje que puede realizar las siguientes acciones:
+- Caminar
+- Caminar con sigilo (sin hacer ruido para no ser detectado por los enemigos, pero yendo más lento)
+- Agacharse y andar agachado generando menos ruido que caminando pero más que con sigilo.
+- Correr, que genera mucho ruido.
+- Disparar con un arma de distancia, para generar ruido con lo que impacte, y para activar botones que estén alejados. 
+- Los disparos tendrán un tiempo de recarga antes de poder volver a disparar. Si se dispara a un enemigo se le ralentiza, pero no se le daña. 
+- Utilizar e implementar un Pool para los proyectiles.
+- El personaje tiene una cantidad de vida y puede ser herido por torretas. 
+- Si es “tocado” por un guardia muere automáticamente.
+- Existiran dos tipos de enemigos:
+- Guardias que realizarán patrullas prefijadas por el diseñador y se deben exponer toda la configuración de las mismas para su trabajo de manera sencilla. Podrán escuchar y ver al jugador. Si escuchan un ruido van a ver la zona en la que lo han oído y si no ven nada, permanecen un tiempo configurable para el diseñador de modo fácil en el área antes de volver al anterior punto de patrulla al que estaban yendo. Si ven al jugador, le persiguen a no ser que le pierdan de vista durante X segundos configurables para el diseñador. En ese caso, vuelven al último punto de su patrulla y vuelven a activar sus sentidos de ruido y vista.
+- El otro tipo de enemigos son torretas, que sólo tienen visión. Se giran lentamente hasta la posición del jugador que hayan visto y le arremeten ráfagas de disparos que pueden herirle. Generan ruido al ver a un jugador y avisan a los patrulleros de que han detectado un jugador dándoles su última posición vista (actuarán como si hubieran oído algo en dicha posición). Las torretas también pueden herir a los guardias, aunque no los atacan.
+- Las reglas de juego consisten en llegar a un trigger final antes de un tiempo determinado. 
+- En caso de no llegar en menos del tiempo especificado, se pierde la partida o en el caso de que el jugador pierda toda la vida.
+- Como elementos de Gameplay existirán:
+- Botones en paredes, que se activarán durante un tiempo X configurable por el diseñador, antes de desactivar el elemento que se les asigne (también configurable por el diseñador, mediante un Interface que prepararemos de código).
+- Pulsadores de suelo, que funcionan como los anteriores pero sólo con la presión de un jugador/guardia. Emiten ruido al ser pulsados.
+- Puertas, que tienen estado abierto o cerrado. Implementan un interfaz y sólo se activan mediante Botones o Pulsadores.
+- Ascensores planos, que tendrán un estado de reposo con una posición inicial y una posición final al ser activados. Implementarán también el interfaz realizado para las puertas para poder ser activados con Botones y pulsadores.
+- Se tiene que poder jugar correctamente, sin problemas, múltiples veces sin necesidad de volver a arrancar la aplicación.
+
+
+- TAREA 2: Integración de arte y modelos de videojuego. Feedback visual. [
+
+- Se debe crear una DEMO en el que el usuario interactúe con la tecnología Unreal Engine 4 siguiendo las directivas indicadas por nuestro posible contratador. Las reglas del juego han sido expuestas más arriba.
+
+- [LO 3.1 Gather different 3D models and explain the performance impact of each of them] 
+- [LO 3.2 Use Skeletal 3D Models in a UE4 project] 
+- [LO 3.3 Use Static Meshes for a UE4 project] 
+- [LO 4.1 Use 3D model animations to generate an interactive feedback] 
+- [LO 4.3 Explore an animation solution for a video-game Project] 
+- [OE 2.1 Importar y configurar una serie de modelos 3D tanto con esqueleto como sin él dentro de un proyecto] 
+- [OE 2.3 Implementar máquinas de estado controladas mediante eventos y chequeo de variables para dichos modelos] 
+- [OE 2.4 Coordinar el funcionamiento de dichas máquinas de estado con la interacción del usuario] 
+- Buscaremos y utilizaremos las animaciones y modelos a nuestro alcance que podamos integrar en Unreal Engine 4, siempre con licencias que nos permitan utilizarlo
+- Los integraremos correctamente en el motor y deberán funcionar correctamente, de manera suave, sin errores visuales
+- Los elementos del entorno del nivel, no deben ser los usados por prototipos. 
+- Toda acción en el juego deberá ir acompañada de feedback a modo de animación o partículas
+- [LO 4.2 Use interface animations in a game menu]
+- Se realizará un menu de pausa y de opciones inicial (en un mapa aparte este último), que poseerá animaciones cuando aparezca
+- [OE 2.1 Importar y configurar una serie de modelos 3D tanto con esqueleto como sin él dentro de un proyecto] 
+- [OE 2.3 Implementar máquinas de estado controladas mediante eventos y chequeo de variables para dichos modelos] 
+- [OE 2.4 Coordinar el funcionamiento de dichas máquinas de estado con la interacción del usuario] 
+- Se debe crear una máquina de estados de animación de un personaje (UAnimInstance) al menos, combinándola con la interacción por parte del usuario.
+
+
+- TAREA 3: Uso de un sistema de audio propio con UE4 [OE 4]
+
+- [OE 4.1 Comprender el funcionamiento del audio en la tecnología de estudio] 
+- [OE 4.2 Implementar sistemas simples y manejados por eventos de audio para una solución (videojuego)] 
+- Se implementará un sistema de audio que permita realizar al diseñador de niveles de manera sencilla tres tipos de efectos: Crossfading, Layering y Branching. Además, nos servirá como gestor de volumen de diferentes tipos de sonidos, según su categoría: Música, ambiente, sfx. 
+- Se acompañará una guía del diseñador con el uso de la misma. 
+- El uso del sistema debe ser sencillo para un diseñador sin conocimientos de programación sólidos.
+
+
+- TAREA 4: Documentación técnica para diseñadores [OE 5]
+
+- [OE 5.1 Exponer variables y sistemas de programación que faciliten el trabajo del diseñador de niveles] 
+- [OE 5.2 Generar una documentación (Guía del Diseñador) donde se expone el uso de dichas variables]
+- Como se indica más arriba, se expondrán todas las variables necesarias para facilitar el trabajo de un diseñador o programador de scriptado de niveles. 
+- Se debe realizar una guía para el diseñador, indicando las variables de configuración expuestas para los sistemas implementados, los Nodos a los que se pueden llamar desde Blueprint para ampliar y utilizar dichos sistemas y ejemplos donde sea necesario del uso del apartado
+
+
